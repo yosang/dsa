@@ -56,3 +56,4 @@ function bubbleSortV2(numbers) {
 }
 // console.log(bubbleSortV2(myArr)); 
 console.log(bubbleSortV2([1, 2, 3, 4, 5]))
+console.log(bubbleSortV2(['home', 'away', 'charlie', 'franck', 'zachariasbryggen'])) // strings work as well
