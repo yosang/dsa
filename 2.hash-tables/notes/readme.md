@@ -78,3 +78,5 @@ console.log(hash_function('march 6')); // 9
 ```
 
 For `march 6`, the sum of every characters ASCII code is 609, moded with the array above which has a size of 10, the index will be 9.
+
+# Collissions
