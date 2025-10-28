@@ -80,3 +80,53 @@ console.log(hash_function('march 6')); // 9
 For `march 6`, the sum of every characters ASCII code is 609, moded with the array above which has a size of 10, the index will be 9.
 
 # Collissions
+The example above does not take into consideration collisions.
+
+Collisions happen when our hash function return the same hash for different strings. This means one will just overwrite the other. For example `march 6`  and `march 17` both have the hash `9`. 
+
+To implement collision handling we are using linked lists.
+
+This means we are going change our array slots to mini arrays, and in those we are storing key value pairs. So for strings with the exact same hash, both will be stored in the same index, but this time we will store the key and value pairs to retrieve, and update them.
+
+**Adding items**
+Hash the key to get the index
+
+- if the key exists, update the value
+- else push new object into the index array
+
+```js
+  add(key, value) {
+    const index = this.getHash(key);
+
+    // if it already exists, update it
+    for(let pair of this.arr[index]) { // this.arr[index] represents the mini array where our key value pairs are stored
+      if(pair.key === key) {
+        pair.value = value;
+        return
+      }
+    }
+    
+    // Otherwise add it
+    this.arr[index].push({ key, value });
+  }
+```
+
+**Getting items**
+Hash the key to get the index, go to index then loop it
+
+- If found key, return value.
+- the index is just used to select the mini array and the key is used to find the right pair and return the value
+
+```js
+  get(key) {
+    const index = this.getHash(key);
+
+    for(let pair of this.arr[index]) { // loop through the mini array and see if we find the key, if we do, return the value
+      if(pair.key === key) {
+        return pair.value;
+      }
+    }
+
+    return this.arr[index];
+  }
+```
