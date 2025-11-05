@@ -62,23 +62,41 @@ const numbers = [1, 4, 6, 9, 11, 15, 15, 15, 17, 21, 34, 34, 56];
 
 function findAllOccurrences(arr, number) {
   const index = binary_search(arr, number); // We use binary search to retrieve the first index of number
+  
+  if (index === -1) return []; // If no index is returned from binary search return an empty array
+
   const result = [index]; // Once found, populate an array with it
 
-  // Search left side of the array using the found index
-  const left_arr_index = index - 1;
-
-  for (let i = 0; i <= left_arr_index; i++) { // We are going to use i as 0 and up to index - 1
-    if (arr[i] === number) result.push(i);
+  // First search left side of the array for numbers that match number
+    // We start i as index -1
+    // Run it for as long as its great or equal to 0
+    // Decrease i for each iteration
+    // If found, push it
+      // Else break the loop early
+  for (let i = index - 1; i >= 0; i--) {
+    if (arr[i] === number) {
+      result.push(i);
+    } else {
+      break;
+    }
   }
 
-  // Search right side of the array using the found index
-  const right_arr_index = index + 1;
+  // Now search right side of the array for numbers up until the length
+  // We start i as index + 1
+  // Run it up to the length of the array
+  // Increase i for each iteration
+  // If found, push it
+    // Else break the loop early
 
-  for (let i = right_arr_index; i < arr.length; i++) { // We are going to use index + 1 as start for i and to the end of the array
-    if (arr[i] === number) result.push(i);
+  for (let i = index + 1; i < arr.length; i++) {
+    if (arr[i] === number) {
+      result.push(i);
+    } else {
+      break;
+    }
   }
 
-  return result.sort();
+  return result.sort((a, b) => a - b);
 }
 
-console.log(findAllOccurrences(numbers, 15))
+console.log(findAllOccurrences(numbers, 15));
