@@ -13,12 +13,12 @@ function binary_search(arr, num) {
   let left_index = 0;
   let right_index = arr.length - 1;
 
-  while (left_index <= right_index) {
+  while (left_index <= right_index) { // when left > right, break the loop and return -1, we didnt find the number
     // Calculates the middle index and retrieves the middle number
     const mid_index = Math.floor((left_index + right_index) / 2);
     mid_num = arr[mid_index];
 
-    // If we find the target, return the index
+    // Whenever we find the target, return the index
     if (mid_num === num) {
       return mid_index;
     }
@@ -37,7 +37,7 @@ function binary_search(arr, num) {
 }
 
 function binary_search_recursive(arr, left_index, right_index, num) {
-  if (left_index <= right_index) {
+  if (left_index <= right_index) { // same as above, but using recursion, if left > right, we've stepped out of the search range, nothing wa sfound return -1
     const mid_index = Math.floor((left_index + right_index) / 2);
 
     if (arr[mid_index] === num) return mid_index;
@@ -45,7 +45,7 @@ function binary_search_recursive(arr, left_index, right_index, num) {
     if (arr[mid_index] < num) {
       left_index = mid_index + 1;
     } else {
-      right_index = mid_index - 1;
+      right_index = mid_index - 1; 
     }
 
     return binary_search_recursive(arr, left_index, right_index, num);
